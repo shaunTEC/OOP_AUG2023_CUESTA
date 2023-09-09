@@ -1,0 +1,60 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter account details:");
+        System.out.print("Account Number: ");
+        String accountNumber = scanner.nextLine();
+
+        System.out.print("Initial Balance: $");
+        double initialBalance = scanner.nextDouble();
+        scanner.nextLine();
+
+        System.out.print("Customer Name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Phone Number: ");
+        String phoneNumber = scanner.nextLine();
+
+        BankAccount myAccount = new BankAccount(accountNumber, initialBalance, customerName, email, phoneNumber);
+
+        while (true) {
+            System.out.println("\nChoose an action:");
+            System.out.println("1. Deposit");
+            System.out.println("2. Withdraw");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1 -> {
+                    System.out.print("Enter deposit amount: $");
+                    double depositAmount = scanner.nextDouble();
+                    scanner.nextLine();
+                    myAccount.deposit(depositAmount);
+                }
+                case 2 -> {
+                    System.out.print("Enter withdrawal amount: $");
+                    double withdrawalAmount = scanner.nextDouble();
+                    scanner.nextLine();
+                    myAccount.withdraw(withdrawalAmount);
+                }
+                case 3 -> {
+                    System.out.println("Exiting program.");
+                    scanner.close();
+                    System.exit(0);
+                }
+                default -> System.out.println("Invalid choice. Please enter 1, 2, or 3.");
+            }
+
+            System.out.println("Current account balance: $" + myAccount.getAccountBalance());
+        }
+    }
+}
